@@ -35,8 +35,8 @@ public:
     iterator operator--(int) { iterator t=*this; --pos; return t; }
     iterator &operator--() { --pos; return *this; }
 
-    T &operator*() const { return owner->d.at(pos); }
-    T *operator->() const noexcept { return &owner->d.at(pos); }
+    T &operator*() const { return owner->d[pos]; }
+    T *operator->() const noexcept { return &owner->d[pos]; }
 
     bool operator==(const iterator &rhs) const { return owner==rhs.owner && pos==rhs.pos; }
     bool operator!=(const iterator &rhs) const { return !(*this==rhs); }
@@ -66,8 +66,8 @@ public:
     const_iterator operator--(int) { const_iterator t=*this; --pos; return t; }
     const_iterator &operator--() { --pos; return *this; }
 
-    const T &operator*() const { return owner->d.at(pos); }
-    const T *operator->() const noexcept { return &owner->d.at(pos); }
+    const T &operator*() const { return owner->d[pos]; }
+    const T *operator->() const noexcept { return &owner->d[pos]; }
 
     bool operator==(const const_iterator &rhs) const { return owner==rhs.owner && pos==rhs.pos; }
     bool operator!=(const const_iterator &rhs) const { return !(*this==rhs); }
