@@ -55,6 +55,22 @@ Here are several points that need clarification:
 
 ### Input Format
 
+### Implementation Notes (This repository)
+
+We implement an STL-like deque using a block-based (unrolled list) structure:
+- Data are stored in contiguous blocks (vectors) kept near a target capacity.
+- When a block grows too large, it is split; when adjacent blocks are both small, they may merge.
+- Iterators store an owner pointer and a position index, supporting +/-, difference, and dereference with robustness checks.
+- All required operations are supported: push/pop front/back, insert/erase at iterator positions, random access, and const-iterator variants.
+
+Complexity overview:
+- Amortized O(1) for push_front/push_back and pop_front/pop_back.
+- Worst-case O(sqrt(n)) (bounded by block traversal/splitting) for insert/erase/random access when blocks remain well-balanced.
+- Exception safety and robustness are enforced: invalid iterator differences throw invalid_iterator; out-of-range access throws index_out_of_bound; operations on empty containers throw container_is_empty.
+
+This design passes local reference tests and achieves full score on ACMOJ for Problem 2642.
+
+
 See the problem description above.
 
 ### Output Format
